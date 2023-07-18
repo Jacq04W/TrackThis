@@ -30,6 +30,7 @@
 		5E3434702A6636D900978905 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 5E34346F2A6636D900978905 /* FirebaseStorageCombine-Community */; };
 		5E3434722A66428000978905 /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434712A66428000978905 /* ViewModels.swift */; };
 		5E3434742A66439400978905 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434732A66439400978905 /* LoginView.swift */; };
+		5E3434762A66C38D00978905 /* AddNewExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434752A66C38D00978905 /* AddNewExpense.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		5E3434562A66366200978905 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E3434712A66428000978905 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 		5E3434732A66439400978905 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5E3434752A66C38D00978905 /* AddNewExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExpense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		5E34341D2A662EA000978905 = {
 			isa = PBXGroup;
 			children = (
+				5E3434752A66C38D00978905 /* AddNewExpense.swift */,
 				5E3434282A662EA000978905 /* TrackThis */,
 				5E34343A2A662EA100978905 /* TrackThisTests */,
 				5E3434442A662EA100978905 /* TrackThisUITests */,
@@ -316,6 +319,7 @@
 				5E34342C2A662EA000978905 /* ContentView.swift in Sources */,
 				5E3434552A662FAC00978905 /* Models.swift in Sources */,
 				5E3434722A66428000978905 /* ViewModels.swift in Sources */,
+				5E3434762A66C38D00978905 /* AddNewExpense.swift in Sources */,
 				5E3434742A66439400978905 /* LoginView.swift in Sources */,
 				5E34342A2A662EA000978905 /* TrackThisApp.swift in Sources */,
 			);

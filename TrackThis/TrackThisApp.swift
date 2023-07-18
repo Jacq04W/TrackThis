@@ -27,10 +27,11 @@ struct TrackThisApp: App {
         UITabBar.appearance().backgroundColor = UIColor( Color(.black))
         
     }
-    
+    @StateObject var expenseVm = ExpenseViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView(player: Player())
+                .environmentObject(expenseVm)
         }
     }
 }
