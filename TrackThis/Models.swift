@@ -9,22 +9,27 @@ import Foundation
 import Firebase
 import FirebaseCore
 import FirebaseFirestoreSwift
+import FirebaseAuth
+import SwiftUI
 
-enum ExpenseCategory: String, CaseIterable {
-    case food
-    case transportation
-    case entertainment
-    case gas
-}
+//enum ExpenseCategory: String, CaseIterable {
+//    case food
+//    case transportation
+//    case entertainment
+//    case gas
+//}
 ///TODO: Making this codable in firebase 
 //struct CodableExpenseCategory: Codable {
 //    let category: ExpenseCategory
 //}
 
+
+
 struct Player: Identifiable,Codable,Equatable{
+
     @DocumentID var id: String?
     var name = ""
-    var email = ""
+    var email = Auth.auth().currentUser?.email ?? "" 
     var dictionary:[String:Any]{
         return [
             "name" : name,
@@ -34,6 +39,7 @@ struct Player: Identifiable,Codable,Equatable{
     }
 
 }
+
 
 
 
@@ -60,3 +66,10 @@ struct Expense : Identifiable,Codable {
     }
 }
 
+
+struct ExpenseItem: Identifiable,Codable {
+    var id = UUID()
+    let name: String
+    let type: String
+    let amount: Double
+}

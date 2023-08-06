@@ -14,6 +14,11 @@ struct LoginView: View {
     enum Field{
         case email,password
     }
+    @AppStorage("name") var userName: String = ""
+    @AppStorage ("isOnboarding") var isOnboarding = false 
+
+    @State private var showOnboard = false
+
     @State var player: Player
     @State private var email = ""
     @State private var password = ""
@@ -28,23 +33,25 @@ struct LoginView: View {
      var body: some View {
          VStack{
              ZStack{
-                 
                  Color.black
-                 RoundedRectangle (cornerRadius: 30, style: .continuous)
+                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                      .foregroundStyle(wok) .frame (width: 1900, height: 400) .rotationEffect(.degrees (135))
                  .offset (y: -350)
                  
                  VStack{
-                     Text ("Waddup Doe")
+                     Text("Waddup Doe")
                          .foregroundColor (.white).font(.system(size: 40, weight: .bold, design: .rounded))
                      .offset(x: -70, y: -100)
+//                     Text(userName)
+//                         .autocorrectionDisabled()
+//                         .lineLimit(1)
+//                         .foregroundColor (.white).font(.system(size: 40, weight: .bold, design: .rounded))
+//                     .offset(x: -70, y: -90)
                       
-                     
-                     
+                
                      Group{
-                         TextField("NickName", text:$player.name)
                          TextField("Email", text:$email)
-                             .keyboardType (.emailAddress)
+                             .keyboardType(.emailAddress)
                              .autocorrectionDisabled()
                              .textInputAutocapitalization(.never)
                              .submitLabel(.next)
@@ -61,7 +68,10 @@ struct LoginView: View {
                              .submitLabel(.done)
                              .focused($focusField, equals: .password)
                              .onSubmit{
+//                                 userName = player.name
+
                                  focusField = nil
+                                 
                                  
                              }
                              .onChange(of: password){ _ in
@@ -81,8 +91,6 @@ struct LoginView: View {
                      HStack{
                          Button{
                              register()
-
-                            
                          } label : {
                              Text("Sign Up")
                              
@@ -112,7 +120,7 @@ struct LoginView: View {
              // how to properly naviaget to a new view
      .navigationDestination(for: String.self){ view in
                  if view == "ContentView"{
-                     ContentView(showSignInView:$showSignInView)
+                     HomePage(player: player, showSignInView:$showSignInView)
                  }
              }
          }// nav stack
@@ -123,20 +131,19 @@ struct LoginView: View {
          }
 
          .onAppear{
-             // if logged in when the app runs, navigate to the new screen
              if Auth.auth().currentUser != nil {
                  print ("🪵 Login successful !")
                  presentSheet = true
               
              }
-//                    else {
-//                        showOnboard.toggle()
-//                    }
          }
-         .fullScreenCover(isPresented: $presentSheet){
-             ContentView(showSignInView: $showSignInView)
+         .fullScreenCover(isPresented: $showOnboard){
+            PlayerCard(player: player)
+             
      }
-        
+         .fullScreenCover(isPresented: $presentSheet){
+             HomePage(player: player, showSignInView: $showSignInView)
+     }
         
         
         
@@ -165,7 +172,7 @@ struct LoginView: View {
             else{
                 print ("😎 Registration success!")
                 /// load  view
-                         presentSheet = true
+                    showOnboard = true
 
             }
         }

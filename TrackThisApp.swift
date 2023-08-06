@@ -19,6 +19,19 @@ import WeatherKit
 //}
 
 @main
+
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//  func application(_ application: UIApplication,
+//                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//    FirebaseApp.configure()
+//
+//    return true
+//  }
+//}
+
+
+
+
 struct TrackThisApp: App {
 //    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     init(){
@@ -27,11 +40,17 @@ struct TrackThisApp: App {
         UITabBar.appearance().backgroundColor = UIColor( Color(.black))
         
     }
+    
+
     @StateObject var expenseVm = ExpenseViewModel()
     var body: some Scene {
         WindowGroup {
-            LoginView(player: Player())
-                .environmentObject(expenseVm)
+            
+          
+                LoginView(player: Player())
+                    .environmentObject(expenseVm)
+            
+           
         }
     }
 }
