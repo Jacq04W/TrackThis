@@ -29,10 +29,10 @@ struct AddNewExpense: View {
       @State private var amount = 0.0
 
     var categories = [
-"food",
-"whip",
-"gas",
-"outside",
+"Food",
+"Whip",
+"Gas",
+"Outside",
 
 
 ]
@@ -53,137 +53,140 @@ struct AddNewExpense: View {
 
 
     var body: some View {
-        NavigationView{
-            ZStack{
-                Form{
-                    TextField("Name", text: $name)
-                    TextField("Amount", value: $amount, format: .currency(code: "USD"))
-                        .keyboardType(.decimalPad)
-                }
-               
-                  VStack {
-                      
-Text("Choose Category")
-                          .font(.title).bold()
-                          .padding(.top)
-                      ForEach(ExpenseType.allCases, id: \.self) { category in
-                        Button{
-                            ChooseCategory(category)
-                        }
-                    label:{
-                        HStack{
-                            ZStack{
-                                Image(category.rawValue)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(height: 100)
-                                    .frame(width: 350)
-                                VStack{
-                                    Text(category.rawValue)
-                                        .foregroundColor(Color.white)
-                                        .font(.title2).bold()
-                                    
-                                }
-                                 
-                            }                                .clipShape(RoundedRectangle(cornerRadius: 20))
-                                 .overlay(
-                                    
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.green, lineWidth:  selectedButton == category ? 3 : 0)
-                                        
-                                    
-                                    
-                                   
-
-                                         
-                                    )
-                            
-                        }
-                    }
-                        
-                       
-                                      
-                                        
-                                   }
-                               }
-                  .padding(.top,40)
-                  
-                
-                
-                
-                
-            }
-            .navigationTitle("Add Expense")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button{
-                        dismiss()
-                        
-                    }
-                label: {
-                    Image(systemName: "xmark.octagon.fill")
-                        
-                }.buttonStyle(PlainButtonStyle())
-                }
-                ToolbarItem(placement: .automatic) {
-                    
-                    Button{
-    // let the new values be filled in from the user whemn we hit the save button add the new values to the array 
-                        let expense = ExpenseItem(name: name, type: selectedCategory?.rawValue ?? "" , amount: amount)
-                expenses.items.append(expense)
-                                  
-                        dismiss()
-                        
-                        
-                        
-                        
-//                        Task{
-//            let success = await vm.saveExpense(player: player, expense: expense)
-//                                if success {
-//                                    dismiss()
-//
-//                                } else {
-//                                    alert.toggle()
-//                                    print("🤬Error: Couldnt save expense")                                }
-//
-//                        }
-                        
-                        
-                    }
-                label: {
-                    VStack{
-                        Image(systemName: "bonjour")
-                            .bold()
-                        Text("Save")
-                            .font(.callout)
-                        
+        ScrollView {
+            VStack{
+                    Section{
+                        TextField("Name", text: $name)
+                            .textFieldStyle (.roundedBorder)
+                            .overlay {
+                                RoundedRectangle (cornerRadius: 5)
+                                    .stroke(name.isEmpty ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: name.isEmpty ? 3 :  4)
+                                
+                            }
+                        TextField("Amount", value: $amount, format: .currency(code: "USD"))
+                            .textFieldStyle (.roundedBorder)
+                            .overlay {
+                                RoundedRectangle (cornerRadius: 5)
+                                .stroke(amount == 0 ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: name.isEmpty ? 3 :  4)                            }
+                            .keyboardType(.numbersAndPunctuation)
                     }
                    
-                        
-                }.buttonStyle(PlainButtonStyle())
-                }
+                      Section {
+                          
+    Text("Choose Category")
+                              .font(.title).bold()
+                              .padding(.top)
+                          ForEach(ExpenseType.allCases, id: \.self) { category in
+                            Button{
+                                withAnimation{
+                                    ChooseCategory(category)
 
-            }
-            .alert("Error", isPresented: $alert) {
-                
-                Button("OK"){}
-            }
-//            .onAppear{
-//
-//                if !previewRunning && player.id != nil { // This is to prevent PreviewProvider error
-//                    $expenses.path = "players/\(player.id ?? "")/expenses"
-//                    print("reviews.path = \($expenses.path)")
-//
-//
-//                } else { // spot.id starts out as nil
-////                    showingAsSheet = true
-//                }
-//
-//
-//            }
+                                }
+                            }
+                        label:{
+                            HStack{
+                                ZStack{
+                                    Image(category.rawValue)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: 100)
+                                        .frame(width: 350)
+                                    VStack{
+                                        Text(category.rawValue)
+                                            .foregroundColor(selectedButton == category ? .green : .white)
+                                            .font(selectedButton == category ? .title : .title2 ).bold()
+                                        
+                                    }
+                                     
+                                }                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                     .overlay(
+                                        
+                                            RoundedRectangle(cornerRadius: 20)
+    .stroke(Color.green, lineWidth:  selectedButton == category ? 3 : 0)
+                                        )
+                                
+                            }
+                        }       
+                                       }
+                                   }
+//                      .padding(.top,40)
+                       
+                    
+                }
+                                .padding()
+
+                 .navigationTitle("Add Expense")
+                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button{
+                            dismiss()
+                            
+                        }
+                    label: {
+                        Image(systemName: "xmark.octagon.fill")
+                            
+                    }.buttonStyle(PlainButtonStyle())
+                    }
+                    ToolbarItem(placement: .automatic) {
+                        
+                        Button{
+        // let the new values be filled in from the user whemn we hit the save button add the new values to the array
+            let expense = ExpenseItem(name: name, type: selectedCategory?.rawValue ?? "" , amount: amount)
+                    expenses.items.append(expense)
+                                      
+                            dismiss()
+                            
+                            
+                            
+                            
+    //                        Task{
+    //            let success = await vm.saveExpense(player: player, expense: expense)
+    //                                if success {
+    //                                    dismiss()
+    //
+    //                                } else {
+    //                                    alert.toggle()
+    //                                    print("🤬Error: Couldnt save expense")                                }
+    //
+    //                        }
+                            
+                            
+                        }
+                    label: {
+                        VStack{
+                            Image(systemName: "bonjour")
+                                .bold()
+                            Text("Save")
+                                .font(.callout)
+                            
+                        }
+                       
+                            
+                    }.buttonStyle(PlainButtonStyle())
+                    }
+
+                }
+                .alert("Error", isPresented: $alert) {
+                    
+                    Button("OK"){}
+                }
+    //            .onAppear{
+    //
+    //                if !previewRunning && player.id != nil { // This is to prevent PreviewProvider error
+    //                    $expenses.path = "players/\(player.id ?? "")/expenses"
+    //                    print("reviews.path = \($expenses.path)")
+    //
+    //
+    //                } else { // spot.id starts out as nil
+    ////                    showingAsSheet = true
+    //                }
+    //
+    //
+    //            }
+            
+            .preferredColorScheme(.dark)
         }
-        .preferredColorScheme(.dark)
 
 
 

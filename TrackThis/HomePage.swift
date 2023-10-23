@@ -55,27 +55,65 @@ struct HomePage: View {
 // sheets
 @Binding var showSignInView : Bool
 @State private var showAddExpense = false
+    @State private var showAddDeposit = false
+
 @StateObject private var viewModel = ProfileViewModel()
     @StateObject private var expenses = Expenses()
     var previewRunning = false
     var body: some View {
         NavigationView {
-            List{
-                ForEach(expenses.items,id: \.id) { item in
-                    HStack {
-                           VStack(alignment: .leading) {
-                               Text(item.name)
-                                   .font(.headline)
-                               Text(item.type)
-                           }
-
-                           Spacer()
-                           Text(item.amount, format: .currency(code: "USD"))
-                       }                }
+            
+            Group{
                 
-                .onDelete(perform: removeItems)
+                if expenses.items.isEmpty {
+                    Text("Track Yo First Expense 😎")
+                        .font(.system(size: 15, weight: .black, design: .monospaced))
+                        
+                        .lineLimit(1)
+                        .frame(width: 250, height: 250)
+                        .padding()
+                        .background(RadialGradient(colors: [.red,.indigo], center: .topTrailing, startRadius: 70, endRadius: 108))
+                        .cornerRadius(20)
+                        .onTapGesture {
+                            showAddExpense.toggle()
+                        }
+ 
+                } else {
+                    List{
+                        ForEach(expenses.items,id: \.id) { item in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                
+                                Spacer()
+                                Text(item.amount, format: .currency(code: "USD"))
+                            }
+                           
+                            
+                            
+//                            .background(Image(item.type).resizable()
+//                                .frame(maxWidth: .infinity))
+//                            .frame(height: 30)
+                                       // )
+
+                                .scaledToFill()
+                        }
+                        
+                        .onDelete(perform: removeItems)
+                        HStack{
+                            Text("Amount Spent:")
+                            Text(expenses.totalExpenses, format: .currency(code: "USD"))
+                                .foregroundColor(.green).bold()
+                        }
+
+                    }
+                    .listStyle(PlainListStyle())
+                    
+                }
             }
-            .listStyle(PlainListStyle())
             
 //
 //                Task{
@@ -100,15 +138,33 @@ struct HomePage: View {
                     LoginView(player: Player())
                 }
             }
+.sheet(isPresented: $showAddDeposit, content: {
+DepositView(expenses: expenses)
+})
             .fullScreenCover(isPresented:$showAddExpense) {
                 NavigationStack{
                     AddNewExpense(player: player, expenses: expenses)
-
                 }
+
+                
             }
 
         .toolbar{
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button{
+                    showAddDeposit.toggle()
+                    
+                }label : {
+                    HStack{
+            Text(expenses.walletAmount,format: .currency(code: "USD"))
+                        Image(systemName: "creditcard")
+ 
+                    }
+                } .bold()
+                .buttonStyle(.borderedProminent)
+                .tint(.indigo)
+
+                
                 Button{
 //        let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
 //                            expenses.items.append(expense)
@@ -119,7 +175,7 @@ struct HomePage: View {
                     Image(systemName: "plus")
                 }
             }
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button("sign out"){
                     Task {
                         do {
@@ -143,6 +199,10 @@ struct HomePage: View {
     
     func signOut() throws {
         try Auth.auth().signOut()
+    }
+    
+    func ExpenseList(_ item: ExpenseItem){
+        
     }
 }
 

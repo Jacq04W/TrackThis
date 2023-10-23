@@ -41,6 +41,33 @@ class Expenses: ObservableObject {
         }
     }
     
+    @Published var deposits = [DepositItem](){
+        didSet {
+            if let encoded = try? JSONEncoder().encode(deposits) {
+                UserDefaults.standard.set(encoded, forKey: "Deposits")
+            }
+        }
+    }
+    
+    var totalExpenses : Double {
+          return items.reduce(0) { $0 + $1.amount }
+      }
+    
+    var walletAmount : Double {
+        return deposits.reduce(0) { $0 + $1.amount }
+
+    }
+    func deposit(amount: Double) {
+            let depositItem = DepositItem(name: "Deposit", amount: amount)
+            deposits.append(depositItem)
+        }
+    
+     
+    
+//    var myDeposits : Int {
+//        return 0 
+//    }
+    
     init() {
         // access the items we saved to UserStorage
         if let savedItems = UserDefaults.standard.data(forKey: "Items") {
