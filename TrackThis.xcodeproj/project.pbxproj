@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E34342A2A662EA000978905 /* TrackThisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434292A662EA000978905 /* TrackThisApp.swift */; };
 		5E34342C2A662EA000978905 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34342B2A662EA000978905 /* HomePage.swift */; };
-		5E34342E2A662EA000978905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E34342D2A662EA000978905 /* Assets.xcassets */; };
+		5E34342E2A662EA000978905 /* p.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E34342D2A662EA000978905 /* p.xcassets */; };
 		5E3434322A662EA000978905 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3434312A662EA000978905 /* Preview Assets.xcassets */; };
 		5E34343C2A662EA100978905 /* TrackThisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34343B2A662EA100978905 /* TrackThisTests.swift */; };
 		5E3434462A662EA100978905 /* TrackThisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434452A662EA100978905 /* TrackThisUITests.swift */; };
@@ -56,7 +56,7 @@
 		5E3434262A662EA000978905 /* TrackThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3434292A662EA000978905 /* TrackThisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackThisApp.swift; sourceTree = "<group>"; };
 		5E34342B2A662EA000978905 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
-		5E34342D2A662EA000978905 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E34342D2A662EA000978905 /* p.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = p.xcassets; sourceTree = "<group>"; };
 		5E34342F2A662EA000978905 /* TrackThis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackThis.entitlements; sourceTree = "<group>"; };
 		5E3434312A662EA000978905 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5E3434372A662EA100978905 /* TrackThisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackThisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +142,7 @@
 				5E3434752A66C38D00978905 /* AddNewExpense.swift */,
 				5E3434542A662FAC00978905 /* Models.swift */,
 				5E3434712A66428000978905 /* ViewModels.swift */,
-				5E34342D2A662EA000978905 /* Assets.xcassets */,
+				5E34342D2A662EA000978905 /* p.xcassets */,
 				5E34342F2A662EA000978905 /* TrackThis.entitlements */,
 				5E3434302A662EA000978905 /* Preview Content */,
 			);
@@ -296,7 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E3434322A662EA000978905 /* Preview Assets.xcassets in Resources */,
-				5E34342E2A662EA000978905 /* Assets.xcassets in Resources */,
+				5E34342E2A662EA000978905 /* p.xcassets in Resources */,
 				5E3434572A66366200978905 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +488,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TrackThis;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -526,6 +528,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TrackThis;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

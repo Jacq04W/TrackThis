@@ -138,7 +138,7 @@ struct LoginView: View {
              }
          }
          .fullScreenCover(isPresented: $showOnboard){
-            PlayerCard(player: player)
+             PlayerCard(player: player, expenses: Expenses())
              
      }
          .fullScreenCover(isPresented: $presentSheet){

@@ -13,13 +13,9 @@ import FirebaseStorage
 
 @MainActor
 
-
-
 final class AuthenticationManager {
     static let shared = AuthenticationManager()
-    private init() { }
-
-    
+    private init(){}
     func getAuthenticatedUser() throws -> AuthDataResultModel {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
@@ -27,10 +23,10 @@ final class AuthenticationManager {
         
         return AuthDataResultModel(user: user)
     }
-    
 }
 
 class Expenses: ObservableObject {
+    // Computed properties
     @Published var items = [ExpenseItem](){
         //Use this to decode each item added to the array
         // and save them to the user defaults
@@ -40,7 +36,6 @@ class Expenses: ObservableObject {
             }
         }
     }
-    
     @Published var deposits = [DepositItem](){
         didSet {
             if let encoded = try? JSONEncoder().encode(deposits) {
@@ -48,40 +43,77 @@ class Expenses: ObservableObject {
             }
         }
     }
-    
-    var totalExpenses : Double {
+     var totalExpenses : Double {
           return items.reduce(0) { $0 + $1.amount }
       }
-    
-    var walletAmount : Double {
-        return deposits.reduce(0) { $0 + $1.amount }
+     var walletAmount : Double {
+        // evrytime we add to the total expenses we take away from the wallet amount
+        
+              let totalDeposits = deposits.reduce(0) { $0 + $1.amount }
+         let remainingAmount = totalDeposits - totalExpenses
+             return remainingAmount
+
+         
+         
 
     }
+    
+    func deleteDepositsUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "Deposits")
+        deposits = []  // Reset the deposits array to an empty state
+    }
+    
+    func deleteExpensessUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "Items")
+        items = []  // Reset the deposits array to an empty state
+    }
+
     func deposit(amount: Double) {
-            let depositItem = DepositItem(name: "Deposit", amount: amount)
-            deposits.append(depositItem)
+        do{
+            let depositItem = DepositItem(name: "Deposits", amount: amount)
+        self.deposits.append(depositItem)
+            print(deposits.count)
+
+            
+        } catch {
+        print("🤬Error: Can not deposit item")
+        }
         }
     
-     
-    
-//    var myDeposits : Int {
-//        return 0 
-//    }
-    
-    init() {
+    // functions
+    func loadExpenses(){
         // access the items we saved to UserStorage
         if let savedItems = UserDefaults.standard.data(forKey: "Items") {
             //Decode the whole array so we can use the data in our app
             if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
                 items = decodedItems
+
                 return
+                
             }
         }
 
         items = []
     }
+    func loadDeposits(){
+        if let depositItem = UserDefaults.standard.data(forKey: "Deposits") {
+            if let decodedItems = try? JSONDecoder().decode([DepositItem].self, from: depositItem) {
+                deposits = decodedItems
+                print("Test This ")
 
-
+                return
+                
+            }
+        }
+    }
+    
+    // this init makes the data we saved in our app storage appear soon as the app is run
+    // pt.2 of firestore query
+    init(){
+        print("init deposit: \(deposits.count)")
+        self.loadExpenses()
+        self.loadDeposits()
+    }
 }
 
 

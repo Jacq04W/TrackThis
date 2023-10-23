@@ -15,6 +15,8 @@ import SwiftUI
 struct PlayerCard: View {
 @State var player : Player
 @StateObject var vm = ExpenseViewModel()
+    @ObservedObject var expenses: Expenses
+
 @Environment(\.dismiss) var dismiss
 @State private var playNow = false
 @AppStorage ("isOnboarding") var isOnboarding: Bool?
@@ -28,7 +30,12 @@ struct PlayerCard: View {
                 .font(.title3)
             TextField("Name", text: $player.name)
                 .textFieldStyle(.roundedBorder)
+                .overlay {
+                    RoundedRectangle (cornerRadius: 5)
+                        .stroke(player.name.isEmpty ? .blue.opacity(0.5) : .indigo.opacity(0.5), lineWidth: player.name.isEmpty ? 3 :  4)
 
+                    
+                }
             Button("Done"){
                 
                 Task{
@@ -39,8 +46,11 @@ struct PlayerCard: View {
 
                     if success {
                         isOnboarding = false
+                        expenses.deleteDepositsUserDefaults()
+                        expenses.deleteExpensessUserDefaults()
+
                         playNow.toggle()
-//                        dismiss()
+                        
                     } else {
                         print("🤬Error: Couldnt save Player on card")
                     }
@@ -51,6 +61,7 @@ struct PlayerCard: View {
             .bold()
             .offset(y:20)
         }
+        .preferredColorScheme(.dark)
         .padding()
        
         .frame(width: 250, height: 200)
@@ -70,7 +81,8 @@ struct PlayerCard: View {
 
 struct PlayerCard_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerCard(player: Player())
+        PlayerCard(player: Player(), expenses: Expenses())
+            .environmentObject(Expenses())
             .environmentObject(ExpenseViewModel())
         
     }

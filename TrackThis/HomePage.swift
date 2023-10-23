@@ -55,8 +55,8 @@ struct HomePage: View {
 // sheets
 @Binding var showSignInView : Bool
 @State private var showAddExpense = false
-    @State private var showAddDeposit = false
-
+@State private var showAddDeposit = false
+@State private var confirmDelete = false
 @StateObject private var viewModel = ProfileViewModel()
     @StateObject private var expenses = Expenses()
     var previewRunning = false
@@ -66,7 +66,7 @@ struct HomePage: View {
             Group{
                 
                 if expenses.items.isEmpty {
-                    Text("Track Yo First Expense 😎")
+                    Text("Track Your First Expense 😎")
                         .font(.system(size: 15, weight: .black, design: .monospaced))
                         
                         .lineLimit(1)
@@ -148,35 +148,8 @@ DepositView(expenses: expenses)
 
                 
             }
-
-        .toolbar{
-            ToolbarItemGroup(placement: .primaryAction) {
-                Button{
-                    showAddDeposit.toggle()
-                    
-                }label : {
-                    HStack{
-            Text(expenses.walletAmount,format: .currency(code: "USD"))
-                        Image(systemName: "creditcard")
- 
-                    }
-                } .bold()
-                .buttonStyle(.borderedProminent)
-                .tint(.indigo)
-
-                
-                Button{
-//        let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
-//                            expenses.items.append(expense)
-//                }
-                    
-                    showAddExpense.toggle()}
-                label : {
-                    Image(systemName: "plus")
-                }
-            }
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button("sign out"){
+            .alert("Are you sure you want to sign out? ", isPresented: $confirmDelete) {
+                Button("OK", role: .destructive) {
                     Task {
                         do {
                 try signOut()
@@ -184,8 +157,45 @@ DepositView(expenses: expenses)
                         } catch {
                             print("Error: Can not sign out")
                         }
-                    }                        }
+                    }
+                    
+                }
+                      } message: {
+                          Text("All your data will be deleted.")
+                      }
+              
+        .toolbar{
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button{
+                    showAddDeposit.toggle()
+                }
+            label: {
+                    HStack{
+            Text(expenses.walletAmount,format: .currency(code: "USD"))
+                        Image(systemName: "creditcard")
+ 
+                    }
+                }
+                .bold()
+                .buttonStyle(.borderedProminent)
+                .tint(.indigo)
+
                 
+                Button{
+                    showAddExpense.toggle()}
+                label:{
+                    Image(systemName: "plus")
+                }
+                .buttonStyle(.bordered)
+                .tint(Color.green)
+                
+            }
+            
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button("Sign out"){
+                    confirmDelete.toggle()
+                    //are you sure you want to sign out
+                }
                 .font(.system(size:20,weight: .bold))
                 .foregroundColor(.red)
             }
@@ -201,9 +211,7 @@ DepositView(expenses: expenses)
         try Auth.auth().signOut()
     }
     
-    func ExpenseList(_ item: ExpenseItem){
-        
-    }
+     
 }
 
 struct ContentView_Previews: PreviewProvider {
