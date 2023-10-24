@@ -87,9 +87,9 @@ class Expenses: ObservableObject {
         items = []  // Reset the deposits array to an empty state
     }
 
-    func deposit(amount: Double) {
+    func deposit(name: String, amount: Double) {
         do{
-            let depositItem = DepositItem(name: "Deposits", amount: amount)
+            let depositItem = DepositItem(name: name, amount: amount, date: Date())
         self.deposits.append(depositItem)
             print(deposits.count)
 

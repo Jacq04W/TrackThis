@@ -66,6 +66,7 @@ struct HomePage: View {
             Group{
                 
                 if expenses.items.isEmpty {
+//                    Text("Welcome \(viewModel.)")
                     Text("Track Your First Expense 😎")
                         .font(.system(size: 15, weight: .black, design: .monospaced))
                         
@@ -105,6 +106,8 @@ struct HomePage: View {
                                     Text(item.name)
                                         .font(.headline)
                                     Text(item.type)
+                                        .font(.caption)
+                                        .foregroundStyle(.gray)
                                 }
                                 
                                 Spacer()
@@ -113,7 +116,8 @@ struct HomePage: View {
                                 Text("-\(itemAmount)")
                                     .foregroundStyle(.red)
                             }
-                        }
+                        }.onDelete(perform: removeItems)
+
                         HStack{
                             Text("Amount Spent:")
                             Text(expenses.totalExpenses, format: .currency(code: "USD"))
@@ -176,11 +180,16 @@ struct HomePage: View {
                         Image(systemName: "creditcard")
  
                     }
+                    
                 }
                 .bold()
-                .buttonStyle(.borderedProminent)
-                .tint(.indigo)
-
+                .frame(width: 130, height: 35)
+                .background{
+                    Image("purp")
+                        .resizable()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                .buttonStyle(.plain)
                 
                 Button{
                     showAddExpense.toggle()}

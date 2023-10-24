@@ -36,6 +36,10 @@ struct DepositView: View {
             }
         
     }
+    
+    
+    
+    
     var creditcard : some View {
         ZStack {
 //            RoundedRectangle(cornerRadius: 20)
@@ -56,7 +60,7 @@ struct DepositView: View {
         .foregroundStyle(.green)
               
                 Text("XXX XXX XXX 0333")
-                    .font(.title2)
+                    .font(.system(size: 20, weight: .black, design: .monospaced))
                     .bold()
                     .offset(y:20)
                 VStack(spacing:-12 ){
@@ -117,7 +121,7 @@ struct DepositView: View {
     
     var depositButton: some View {
         Button{
-            expenses.deposit(amount: depositAmount)
+            expenses.deposit(name: depositName, amount: depositAmount)
             //                expenses.items.append(expense)
             dismiss()
         }
