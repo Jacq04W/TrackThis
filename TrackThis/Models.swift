@@ -78,4 +78,5 @@ struct DepositItem: Identifiable,Codable {
     var id = UUID()
     let name: String
      let amount: Double
-}
+    let date: Date
+ }

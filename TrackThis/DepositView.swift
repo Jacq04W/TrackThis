@@ -13,12 +13,37 @@ struct DepositView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var expenses: Expenses
     @State private var depositAmount: Double = 0
+    @State private var depositName: String = ""
+    @State private var next = false
 
     var body: some View {
+             VStack{
+                Spacer()
+                creditcard
+                Spacer()
+                Spacer()
+
+                depositButton
+            }
+            .toolbar{
+                ToolbarItem(placement: .cancellationAction) {
+                    Button{
+                        dismiss()
+                    }label: {
+                        Image(systemName: "xmark.octagon.fill")
+                    }.buttonStyle(.plain)
+                }
+            }
+        
+    }
+    var creditcard : some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
+//            RoundedRectangle(cornerRadius: 20)
+            Image(.purp)
+                .resizable()
                 .frame(width: 333, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .foregroundStyle(.regularMaterial)
+                .clipShape(.rect(cornerRadius: 20))
             
             
             VStack{
@@ -26,42 +51,96 @@ struct DepositView: View {
                     Spacer()
                     Text(expenses.walletAmount,format: .currency(code: "USD"))
                     
-                }.frame(width: 300)
+                }
         .font(.headline)
         .foregroundStyle(.green)
-                
-                Text("XXX XXX XXX 0433")
-                    .font(.title3)     
+              
+                Text("XXX XXX XXX 0333")
+                    .font(.title2)
                     .bold()
                     .offset(y:20)
-                TextField("Enter deposit amount", value: $depositAmount, format: .currency(code: "USD"))
-                    .keyboardType(.decimalPad)
-                    .textFieldStyle (.roundedBorder)
-                    .frame(width: 200)
-//                    .overlay {
-//                        RoundedRectangle (cornerRadius: 5)
-//                            .stroke(depositAmount == 0 ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: depositAmount == 0  ? 3 :  4)
-//                        
-//                    }
-                    .padding()
-                
-                Button("Deposit") {
-                    expenses.deposit(amount: depositAmount)
-    //                expenses.items.append(expense)
-    dismiss()
-                }
-                .bold()
-                .padding(.horizontal)
-                .padding(.vertical,10)
+                VStack(spacing:-12 ){
+                    if !next {
+                        HStack(spacing:-10){
+                            TextField("Enter deposit amount", value: $depositAmount, format: .currency(code: "USD"))
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle (.roundedBorder)
+                                .frame(width: 200)
+                                .padding()
+                            if depositAmount != 0 {
+                                Button{
+                                    withAnimation(.easeIn) {
+                                        next.toggle()
 
-                .foregroundColor(.white)
-                .background(Color.indigo)
-                .cornerRadius(10)
+                                    }
+                                }
+                            label:{
+                                Image(systemName: "arrow.forward")
+                            }
+                            .buttonStyle(.plain)
+                            }
+                        }
+                    } else {
+                    TextField("Deposit Name", text: $depositName)
+                                .textFieldStyle (.roundedBorder)
+                                .frame(width: 200)
+                                .padding()
+ 
+                    }
+                }
+//
+                
+                HStack(spacing: 5){
+                    Text("CVV ")
+                    Text("444").bold()
+
+                    Text("EXP ")
+                    Text("09/99")
+                        .bold()
+
+
+//
+                    Spacer()
+                    Image(.visa)
+                        .resizable()
+                        .frame(width: 70, height: 30)
+                }
+                .frame(width: 300)
             }
+            
             .preferredColorScheme(.dark)
         .padding()
-        }
+        }.frame(width: 333, height: 200)
+
+
     }
+    
+    var depositButton: some View {
+        Button{
+            expenses.deposit(amount: depositAmount)
+            //                expenses.items.append(expense)
+            dismiss()
+        }
+    label: {
+        ZStack{
+            Image(.purp)
+                .resizable()
+            VStack{
+                Text("Deposit")
+
+            }
+        }
+        .clipShape(.rect(cornerRadius: 10))
+
+    }
+        .frame(width: 330,height: 50)
+        .bold()
+        .disabled(depositAmount == 0 || depositName.isEmpty)
+        .buttonStyle(.plain)
+        
+        
+    }
+
 }
 
 struct DepositView_Previews: PreviewProvider {
@@ -70,6 +149,8 @@ struct DepositView_Previews: PreviewProvider {
             .environmentObject(Expenses())
     }
 }
+
+
 
 
 

@@ -57,124 +57,128 @@ struct AddNewExpense: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack{
-                        Section{
-                            TextField("Name", text: $name)
-                                .textFieldStyle (.roundedBorder)
-                                .overlay {
-                                    RoundedRectangle (cornerRadius: 5)
-                                        .stroke(name.isEmpty ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: name.isEmpty ? 3 :  4)
-                                    
-                                }
-                            TextField("Amount", value: $amount, format: .currency(code: "USD"))
-                                .textFieldStyle (.roundedBorder)
-                                .overlay {
-                                    RoundedRectangle (cornerRadius: 5)
-                                    .stroke(amount == 0 ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: name.isEmpty ? 3 :  4)                            }
-                                .keyboardType(.numbersAndPunctuation)
-                        }
-                       
-                          Section {
-                              
-        Text("Choose Category")
-                                  .font(.title).bold()
-                                  .padding(.top)
-                              ForEach(ExpenseType.allCases, id: \.self) { category in
-                                Button{
-                                    withAnimation{
-                                        ChooseCategory(category)
+                ZStack {
+                    
+                    VStack{
+                            Section{
+                                TextField("Name", text: $name)
+                                    .textFieldStyle (.roundedBorder)
+                                    .overlay {
+                                        RoundedRectangle (cornerRadius: 5)
+                                            .stroke(name.isEmpty ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: name.isEmpty ? 3 :  4)
+                                        
+                                    }
+                                TextField("Amount", value: $amount, format: .currency(code: "USD"))
+                                    .textFieldStyle (.roundedBorder)
+                                    .overlay {
+                                        RoundedRectangle (cornerRadius: 5)
+                                        .stroke(amount == 0 ? .gray.opacity(0.5) : .indigo.opacity(0.5), lineWidth: name.isEmpty ? 3 :  4)                            }
+                                    .keyboardType(.numbersAndPunctuation)
+                            }
+                           
+                              Section {
+                                  
+            Text("Choose Category")
+                                      .font(.title).bold()
+                                      .padding(.top)
+                                  ForEach(ExpenseType.allCases, id: \.self) { category in
+                                    Button{
+                                        withAnimation{
+                                            ChooseCategory(category)
 
+                                        }
+                                    }
+                                label:{
+                                    HStack{
+                                        ZStack{
+                                            Image(category.rawValue)
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(height: 100)
+                                                .frame(width: 350)
+                                            VStack{
+                                                Text(category.rawValue)
+                                                    .foregroundColor(selectedButton == category ? .green : .white)
+                                                    .font(selectedButton == category ? .title : .title2 ).bold()
+                                                
+                                            }
+                                             
+                                        }        .clipShape(RoundedRectangle(cornerRadius: 20))
+                                             .overlay(
+                                                
+                                                    RoundedRectangle(cornerRadius: 20)
+            .stroke(Color.green, lineWidth:  selectedButton == category ? 3 : 0)
+                                                )
+                                        
                                     }
                                 }
-                            label:{
-                                HStack{
-                                    ZStack{
-                                        Image(category.rawValue)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(height: 100)
-                                            .frame(width: 350)
-                                        VStack{
-                                            Text(category.rawValue)
-                                                .foregroundColor(selectedButton == category ? .green : .white)
-                                                .font(selectedButton == category ? .title : .title2 ).bold()
-                                            
-                                        }
-                                         
-                                    }        .clipShape(RoundedRectangle(cornerRadius: 20))
-                                         .overlay(
-                                            
-                                                RoundedRectangle(cornerRadius: 20)
-        .stroke(Color.green, lineWidth:  selectedButton == category ? 3 : 0)
-                                            )
-                                    
-                                }
-                            }
+                                      
+                                               }
                                            }
-                                       }
-    //                      .padding(.top,40)
-                           
-                        
-                    }
-                                    .padding()
-
-                     .navigationTitle("Add Expense")
-                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar{
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button{
-                                dismiss()
-                                
-                            }
-                        label: {
-                            Image(systemName: "xmark.octagon.fill")
-                                
-                        }.buttonStyle(PlainButtonStyle())
-                        }
-                        ToolbarItem(placement: .automatic) {
+        //                      .padding(.top,40)
+                               
                             
-                            Button{
-            // let the new values be filled in from the user whemn we hit the save button add the new values to the array
-                let expense = ExpenseItem(name: name, type: selectedCategory?.rawValue ?? "" , amount: amount)
-    //
-                                
-                                let expenseAmount = expense.amount
-                                   
-                                   // Calculate remaining wallet amount after adding the new expense
-                                let remainingAmount = expenses.walletAmount - expenseAmount
-                                   
-                                   // Check if the new expense is within the wallet's remaining amount
-                                   if remainingAmount >= 0 {
-                                       // Expense is within budget, so add it to the items array
-                                       expenses.items.append(expense)
-                                       dismiss()
-                                   } else {
-                                       // Expense is greater than the wallet amount, so don't allow adding
-                                       moneyAlert.toggle()
-                                       print("🤬ERROR: Not enough money in Virtual wallet")
-                                   }
-                            }
-                        label: {
-                            VStack{
-                                Image(systemName: "bonjour")
-                                    .bold()
-                                Text("Save")
-                                    .font(.callout)
-                                
-                            }
-                           
-                                
-                        }.buttonStyle(PlainButtonStyle())
                         }
+                                        .padding()
 
-                    }
-                    .alert("Error", isPresented: $alert) {
-                        
-                        Button("OK"){}
-                    }
-                    .alert("Can Not Add Expense", isPresented: $moneyAlert) {
-                        Button("Add Now "){ showDepositView.toggle()}
-                    } message: {Text("Add more money to your Virtual Wallet first")}
+                         .navigationTitle("Add Expense")
+                         .navigationBarTitleDisplayMode(.inline)
+                            .toolbar{
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button{
+                                        dismiss()
+    
+                                    }
+                                label: {
+                                    Image(systemName: "xmark.octagon.fill")
+    
+                                }.buttonStyle(PlainButtonStyle())
+                                }
+                                ToolbarItem(placement: .automatic) {
+    //
+                                    Button{
+                    // let the new values be filled in from the user whemn we hit the save button add the new values to the array
+                        let expense = ExpenseItem(name: name, type: selectedCategory?.rawValue ?? "" , amount: amount)
+            //
+    
+                                        let expenseAmount = expense.amount
+    
+                                           // Calculate remaining wallet amount after adding the new expense
+                                        let remainingAmount = expenses.walletAmount - expenseAmount
+    
+                                           // Check if the new expense is within the wallet's remaining amount
+                                           if remainingAmount >= 0 {
+                                               // Expense is within budget, so add it to the items array
+                                               expenses.items.append(expense)
+                                               dismiss()
+                                           } else {
+                                               // Expense is greater than the wallet amount, so don't allow adding
+                                               moneyAlert.toggle()
+                                               print("🤬ERROR: Not enough money in Virtual wallet")
+                                           }
+                                    }
+                                label: {
+                                    VStack{
+                                        Image(systemName: "bonjour")
+                                            .bold()
+                                        Text("Save")
+                                            .font(.callout)
+    
+                                    }
+    
+    
+                                }.buttonStyle(PlainButtonStyle())
+                                }
+    
+                            }
+                        .alert("Error", isPresented: $alert) {
+                            
+                            Button("OK"){}
+                        }
+                        .alert("Can Not Add Expense", isPresented: $moneyAlert) {
+                            Button("Add Now "){ showDepositView.toggle()}
+                        }message: {Text("Add more money to your Virtual Wallet first")}
+                }
                 
         
             }

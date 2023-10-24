@@ -13,17 +13,24 @@ import FirebaseStorage
 
 @MainActor
 
-final class AuthenticationManager {
-    static let shared = AuthenticationManager()
-    private init(){}
-    func getAuthenticatedUser() throws -> AuthDataResultModel {
-        guard let user = Auth.auth().currentUser else {
-            throw URLError(.badServerResponse)
-        }
-        
-        return AuthDataResultModel(user: user)
-    }
+
+struct Transactions:Identifiable {
+    let id: UUID
+    var items: [ExpenseItem]
+    var deposits: [ DepositItem]
+    
 }
+//final class AuthenticationManager {
+//    static let shared = AuthenticationManager()
+//    private init(){}
+//    func getAuthenticatedUser() throws -> AuthDataResultModel {
+//        guard let user = Auth.auth().currentUser else {
+//            throw URLError(.badServerResponse)
+//        }
+//        
+//        return AuthDataResultModel(user: user)
+//    }
+//}
 
 class Expenses: ObservableObject {
     // Computed properties
@@ -36,6 +43,18 @@ class Expenses: ObservableObject {
             }
         }
     }
+    
+    @Published var allTransactions = [ExpenseItem](){
+        //Use this to decode each item added to the array
+        // and save them to the user defaults
+        didSet {
+            if let encoded = try? JSONEncoder().encode(allTransactions) {
+                UserDefaults.standard.set(encoded, forKey: "AllTransactions")
+            }
+        }
+    }
+    
+    
     @Published var deposits = [DepositItem](){
         didSet {
             if let encoded = try? JSONEncoder().encode(deposits) {
@@ -86,6 +105,8 @@ class Expenses: ObservableObject {
         if let savedItems = UserDefaults.standard.data(forKey: "Items") {
             //Decode the whole array so we can use the data in our app
             if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+                
+//                fill the data into the bucket
                 items = decodedItems
 
                 return
@@ -95,6 +116,8 @@ class Expenses: ObservableObject {
 
         items = []
     }
+    
+    
     func loadDeposits(){
         if let depositItem = UserDefaults.standard.data(forKey: "Deposits") {
             if let decodedItems = try? JSONDecoder().decode([DepositItem].self, from: depositItem) {

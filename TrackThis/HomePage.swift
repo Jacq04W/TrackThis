@@ -80,7 +80,26 @@ struct HomePage: View {
  
                 } else {
                     List{
-                        ForEach(expenses.items,id: \.id) { item in
+                        ForEach(expenses.deposits, id: \.id) { deposit in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(deposit.name)
+                                        .font(.headline)
+//                                    Text(deposit.date) // Assuming there's a date associated with the deposit
+                                }
+                                
+                                Spacer()
+                                let depositAmount = Text(deposit.amount, format: .currency(code: "USD"))
+                                
+                                Text("+\(depositAmount)")
+                                    .foregroundStyle(.green) // Assuming deposits should be highlighted in green
+                            }
+                        }
+
+                        Text("Expenses")
+                            .font(Font.custom("Marker Felt", size: 40))
+                            .frame(width: 300, height: 20)
+                        ForEach(expenses.items, id: \.id) { item in
                             HStack {
                                 VStack(alignment: .leading) {
                                     Text(item.name)
@@ -89,20 +108,12 @@ struct HomePage: View {
                                 }
                                 
                                 Spacer()
-                                Text(item.amount, format: .currency(code: "USD"))
+                                let itemAmount = Text(item.amount, format: .currency(code: "USD"))
+                                
+                                Text("-\(itemAmount)")
+                                    .foregroundStyle(.red)
                             }
-                           
-                            
-                            
-//                            .background(Image(item.type).resizable()
-//                                .frame(maxWidth: .infinity))
-//                            .frame(height: 30)
-                                       // )
-
-                                .scaledToFill()
                         }
-                        
-                        .onDelete(perform: removeItems)
                         HStack{
                             Text("Amount Spent:")
                             Text(expenses.totalExpenses, format: .currency(code: "USD"))
@@ -111,35 +122,25 @@ struct HomePage: View {
 
                     }
                     .listStyle(PlainListStyle())
+                    .labelsHidden()
                     
                 }
             }
-            
-//
-//                Task{
-//                    do{
-//                        let reusult = Auth.auth().currentUser?.displayName
-//                        player.name = reusult ?? "Unkown Name"
-//                    }
-//                    catch
-//                    {
-//                        print("Error: can not find user name")
-//                    }
-//
-//                }
-                
-//
-//                update the paths so the show the reviews
-            
             .padding()
             .navigationTitle("TrackThis")
+//            .onAppear{
+//                let ni = ExpenseItem(name: "Test", type: "OIJ", amount: 50)
+//                expenses.items.append(ni)
+//            }
 .fullScreenCover(isPresented:$showSignInView) {
                 NavigationStack{
                     LoginView(player: Player())
                 }
             }
 .sheet(isPresented: $showAddDeposit, content: {
-DepositView(expenses: expenses)
+    NavigationStack{
+        DepositView(expenses: expenses)
+    }
 })
             .fullScreenCover(isPresented:$showAddExpense) {
                 NavigationStack{
