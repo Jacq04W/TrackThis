@@ -34,14 +34,21 @@ struct LoginView: View {
          VStack{
              ZStack{
                  Color.black
-                 RoundedRectangle(cornerRadius: 30, style: .continuous)
-                     .foregroundStyle(wok) .frame (width: 1900, height: 400) .rotationEffect(.degrees (135))
+//                 RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                     .foregroundStyle(wok) .frame (width: 1900, height: 400) .rotationEffect(.degrees (135))
+                 Image(.purp)
+                     .resizable()
+                     .frame (width: 1900, height: 400) .rotationEffect(.degrees (135))
                  .offset (y: -350)
                  
                  VStack{
-                     Text("Waddup Doe")
+                     Text("Waddup Doe ")
                          .foregroundColor (.white).font(.system(size: 40, weight: .bold, design: .rounded))
-                     .offset(x: -70, y: -100)
+                     .offset(x: -10, y: -100)
+                     Text("Welcome To TrackThis ")
+                         .lineLimit(1)
+                         .foregroundColor (.white).font(.system(size: 30, weight: .bold, design: .rounded))
+                     .offset(x: -10, y: -100)
 //                     Text(userName)
 //                         .autocorrectionDisabled()
 //                         .lineLimit(1)
@@ -96,6 +103,7 @@ struct LoginView: View {
                              
                          }
                          .buttonStyle(.borderedProminent)
+                         .tint(.indigo)
                          .padding(.trailing)
                          Button{
                              login()
@@ -103,7 +111,10 @@ struct LoginView: View {
                          } label : {
                              Text("Log in")
                                  
-                         }.tint(Color.red)
+                         }                         .buttonStyle(.borderedProminent)
+
+                             .tint(.gray)
+
                          .padding(.leading)
                      }//Hstsack
                      .disabled(buttonsDisabled)
