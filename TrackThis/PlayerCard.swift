@@ -31,8 +31,8 @@ struct PlayerCard: View {
             TextField("Name", text: $player.name)
                 .textFieldStyle(.roundedBorder)
                 .overlay {
-                    RoundedRectangle (cornerRadius: 5)
-                        .stroke(player.name.isEmpty ? .blue.opacity(0.5) : .indigo.opacity(0.5), lineWidth: player.name.isEmpty ? 3 :  4)
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(player.name.isEmpty ? .indigo.opacity(0.5) : .indigo.opacity(0.5), lineWidth: player.name.isEmpty ? 3 :  4)
 
                     
                 }
@@ -65,7 +65,9 @@ struct PlayerCard: View {
         .padding()
        
         .frame(width: 250, height: 200)
-        .background(LinearGradient(colors: [.blue,.cyan], startPoint: .bottomLeading, endPoint: .topTrailing)
+        .background(/*LinearGradient(colors: [.blue,.cyan], startPoint: .bottomLeading, endPoint: .topTrailing)*/
+            Image(.purp)
+                .resizable()
             .clipShape(RoundedRectangle(cornerRadius: 25)))
 
         .fullScreenCover(isPresented: $playNow) {

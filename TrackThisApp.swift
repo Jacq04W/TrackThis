@@ -46,8 +46,8 @@ struct TrackThisApp: App {
     var body: some Scene {
         WindowGroup {
             
-          
-                LoginView(player: Player())
+            PlayerCard(player: Player(), expenses: Expenses())
+//                LoginView(player: Player())
                     .environmentObject(expenseVm)
             
            
