@@ -136,10 +136,10 @@
 			children = (
 				5E3434562A66366200978905 /* GoogleService-Info.plist */,
 				5E3434732A66439400978905 /* LoginView.swift */,
+				5E3434752A66C38D00978905 /* AddNewExpense.swift */,
 				5E34342B2A662EA000978905 /* HomePage.swift */,
 				5ED2D3012A853C3E00E5A349 /* DepositView.swift */,
 				5E36991A2A677779004D67DA /* PlayerCard.swift */,
-				5E3434752A66C38D00978905 /* AddNewExpense.swift */,
 				5E3434542A662FAC00978905 /* Models.swift */,
 				5E3434712A66428000978905 /* ViewModels.swift */,
 				5E34342D2A662EA000978905 /* p.xcassets */,
@@ -488,7 +488,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = TrackThis;
+				INFOPLIST_KEY_CFBundleDisplayName = TrackThiss;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -504,7 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JacqW04.TrackThis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -528,7 +528,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = TrackThis;
+				INFOPLIST_KEY_CFBundleDisplayName = TrackThiss;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -544,7 +544,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JacqW04.TrackThis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
