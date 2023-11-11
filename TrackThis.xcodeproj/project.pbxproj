@@ -32,6 +32,8 @@
 		5E3434742A66439400978905 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434732A66439400978905 /* LoginView.swift */; };
 		5E3434762A66C38D00978905 /* AddNewExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3434752A66C38D00978905 /* AddNewExpense.swift */; };
 		5E36991B2A677779004D67DA /* PlayerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36991A2A677779004D67DA /* PlayerCard.swift */; };
+		5EAF62E62AFDF94600ED60DF /* OnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF62E52AFDF94600ED60DF /* OnBoarding.swift */; };
+		5EC204872AFE6B6A00BC5572 /* onb1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC204862AFE6B6A00BC5572 /* onb1.swift */; };
 		5ED2D3022A853C3E00E5A349 /* DepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2D3012A853C3E00E5A349 /* DepositView.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		5E3434732A66439400978905 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5E3434752A66C38D00978905 /* AddNewExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExpense.swift; sourceTree = "<group>"; };
 		5E36991A2A677779004D67DA /* PlayerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCard.swift; sourceTree = "<group>"; };
+		5EAF62E52AFDF94600ED60DF /* OnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding.swift; sourceTree = "<group>"; };
+		5EC204862AFE6B6A00BC5572 /* onb1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onb1.swift; sourceTree = "<group>"; };
 		5ED2D3012A853C3E00E5A349 /* DepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +141,8 @@
 				5E3434562A66366200978905 /* GoogleService-Info.plist */,
 				5E3434732A66439400978905 /* LoginView.swift */,
 				5E3434752A66C38D00978905 /* AddNewExpense.swift */,
+				5EAF62E52AFDF94600ED60DF /* OnBoarding.swift */,
+				5EC204862AFE6B6A00BC5572 /* onb1.swift */,
 				5E34342B2A662EA000978905 /* HomePage.swift */,
 				5ED2D3012A853C3E00E5A349 /* DepositView.swift */,
 				5E36991A2A677779004D67DA /* PlayerCard.swift */,
@@ -325,7 +331,9 @@
 				5E34342C2A662EA000978905 /* HomePage.swift in Sources */,
 				5E3434552A662FAC00978905 /* Models.swift in Sources */,
 				5E3434722A66428000978905 /* ViewModels.swift in Sources */,
+				5EC204872AFE6B6A00BC5572 /* onb1.swift in Sources */,
 				5E3434762A66C38D00978905 /* AddNewExpense.swift in Sources */,
+				5EAF62E62AFDF94600ED60DF /* OnBoarding.swift in Sources */,
 				5E3434742A66439400978905 /* LoginView.swift in Sources */,
 				5E36991B2A677779004D67DA /* PlayerCard.swift in Sources */,
 				5E34342A2A662EA000978905 /* TrackThisApp.swift in Sources */,
@@ -482,7 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TrackThis/TrackThis.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TrackThis/Preview Content\"";
 				DEVELOPMENT_TEAM = Q883HJGNY5;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -504,7 +512,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JacqW04.TrackThis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -522,7 +530,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TrackThis/TrackThis.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TrackThis/Preview Content\"";
 				DEVELOPMENT_TEAM = Q883HJGNY5;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -544,7 +552,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JacqW04.TrackThis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

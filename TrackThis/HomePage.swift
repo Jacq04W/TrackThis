@@ -66,19 +66,24 @@ struct HomePage: View {
             Group{
                 
                 if expenses.items.isEmpty {
-//                    Text("Welcome \(viewModel.)")
-                    Text("Track Your First Expense 😎")
-                        .font(.system(size: 15, weight: .black, design: .monospaced))
-                        
-                        .lineLimit(1)
-                        .frame(width: 250, height: 250)
-                        .padding()
-                        .background(RadialGradient(colors: [.red,.indigo], center: .topTrailing, startRadius: 70, endRadius: 108))
-                        .cornerRadius(20)
-                        .onTapGesture {
-                            showAddExpense.toggle()
+                    VStack{
+                        Image(.money)
+                            .resizable()
+                            .frame(width: 250, height: 250)
+                        Text("(Tap Here)")
+                            .bold()
+                            .font(.callout)
+                            .foregroundStyle(.gray)
+                    }
+                        .onTapGesture{
+            if expenses.walletAmount <= 0{
+                    showAddDeposit.toggle()
+                    
+                            } else {
+                    showAddExpense.toggle()
+                            }
                         }
- 
+//
                 } else {
                     List{
                         ForEach(expenses.deposits, id: \.id) { deposit in
@@ -146,7 +151,7 @@ struct HomePage: View {
         DepositView(expenses: expenses)
     }
 })
-            .fullScreenCover(isPresented:$showAddExpense) {
+            .sheet(isPresented:$showAddExpense) {
                 NavigationStack{
                     AddNewExpense(player: player, expenses: expenses)
                 }
@@ -190,6 +195,10 @@ struct HomePage: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 .buttonStyle(.plain)
+                
+                
+            }
+            ToolbarItem(placement: .bottomBar) {
                 
                 Button{
                     showAddExpense.toggle()}

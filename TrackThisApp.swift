@@ -43,12 +43,20 @@ struct TrackThisApp: App {
     
 
     @StateObject var expenseVm = ExpenseViewModel()
+    @AppStorage("isOnboarding") var isOnboarding = true
+
     var body: some Scene {
         WindowGroup {
+            onb1()
             
-//            PlayerCard(player: Player(), expenses: Expenses())
-                LoginView(player: Player())
-                    .environmentObject(expenseVm)
+            if isOnboarding{
+                OnBoarding()
+            } else {
+//                PlayerCard(player: Player(), expenses: Expenses())
+                              LoginView(player: Player())
+                                  .environmentObject(expenseVm)
+            }
+//
             
            
         }

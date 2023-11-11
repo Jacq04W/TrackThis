@@ -61,7 +61,7 @@ struct AddNewExpense: View {
                     
                     VStack{
                             Section{
-                                TextField("Name", text: $name)
+                                TextField("Expense Name", text: $name)
                                     .textFieldStyle (.roundedBorder)
                                     .overlay {
                                         RoundedRectangle (cornerRadius: 5)
@@ -181,9 +181,9 @@ struct AddNewExpense: View {
                 }
                 
         
-            }
+            }        .preferredColorScheme(.dark)
+
         }
-        .preferredColorScheme(.dark)
 
 
 
