@@ -167,7 +167,13 @@ struct AddNewExpense: View {
                                     }
     
     
-                                }.buttonStyle(PlainButtonStyle())
+                                }         .disabled(
+                                    name.isEmpty || amount.isZero || selectedCategory == nil
+                                
+                                )
+
+                                .buttonStyle(PlainButtonStyle())
+                                    
                                 }
     
                             }

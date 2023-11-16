@@ -72,6 +72,7 @@
 		5E3434732A66439400978905 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5E3434752A66C38D00978905 /* AddNewExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExpense.swift; sourceTree = "<group>"; };
 		5E36991A2A677779004D67DA /* PlayerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCard.swift; sourceTree = "<group>"; };
+		5E8445CC2B028A8C00AC5DBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5EAF62E52AFDF94600ED60DF /* OnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding.swift; sourceTree = "<group>"; };
 		5EC204862AFE6B6A00BC5572 /* onb1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onb1.swift; sourceTree = "<group>"; };
 		5ED2D3012A853C3E00E5A349 /* DepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositView.swift; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 		5E3434282A662EA000978905 /* TrackThis */ = {
 			isa = PBXGroup;
 			children = (
+				5E8445CC2B028A8C00AC5DBB /* Info.plist */,
 				5E3434562A66366200978905 /* GoogleService-Info.plist */,
 				5E3434732A66439400978905 /* LoginView.swift */,
 				5E3434752A66C38D00978905 /* AddNewExpense.swift */,
@@ -490,12 +492,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TrackThis/TrackThis.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"TrackThis/Preview Content\"";
 				DEVELOPMENT_TEAM = Q883HJGNY5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrackThis/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TrackThiss;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -530,12 +533,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TrackThis/TrackThis.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"TrackThis/Preview Content\"";
 				DEVELOPMENT_TEAM = Q883HJGNY5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrackThis/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TrackThiss;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
